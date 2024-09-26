@@ -11,11 +11,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Build and run Docker
-      run: |
-        docker build -t ltchallenge_env .
-        docker run --name ltchallenge -it ltchallenge_env bash
-
     - name: Run pytest
       run: |
         pip install -r requirements_staging.txt
