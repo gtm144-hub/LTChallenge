@@ -1,0 +1,19 @@
+name: Run Tests on Main Branch Pull Request
+
+on:
+  pull_request:
+    branches: [ stage ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Run pytest
+      run: |
+        pip install -r requirements_staging.txt
+        pytest test/q1_tests.py test/q2_tests.py test/q3_tests.py
+
+      if: always() 
