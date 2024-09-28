@@ -30,7 +30,7 @@ Este proyecto analiza datos de tweets para resolver tres problemas específicos 
     ├── q2_tests.py
     ├── q3_tests.py
     └── resources
-        └── twitter_test.json # Datos ligeros para los unit tests
+        └── twitter_test.json # Data sample para los unit tests
 └── .github/
     └── workflows/
         ├── pr_deploy.yml
@@ -70,6 +70,7 @@ Para un análisis más profundo y visualización de resultados, consulta el note
 ## CI/CD Workflow
 
 Este proyecto implementa un workflow de CI/CD utilizando GitHub Actions. El proceso se divide en dos etapas principales:
+
 ![cicd image](/img/ltchallenge_cicd.drawio.png "CI/CD")
 
 ### Pull Requests a la rama `stage`
@@ -85,7 +86,7 @@ Introducción de pruebas de aceptación: Una vez superadas las pruebas de códig
 - Los PRs son rechazados automáticamente si las métricas de tiempo o memoria se reducen.
 - Archivo de configuración: `.github/workflows/pr_deploy.yml`
 
-**Diseño:** Escoger cloud run para acceptance tests permite un estandar para que todos los desarrolladores tengan un estandar donde no haya variaciones de hardware que puedan afectar tiempos de procesamiento y memoria. Asi mismo, permite si se desea escalar datos asi mismo el sistema pueda escalar. 
+**Diseño:** Escoger cloud run para acceptance tests permite un estandar para que todos los desarrolladores tengan un estandar donde no haya variaciones de hardware que puedan afectar tiempos de procesamiento y memoria. Asi mismo, permite escalar datos y al sistema si se requiere. 
 
 ## Autor
 
