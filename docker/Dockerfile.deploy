@@ -6,7 +6,9 @@ COPY . .
 
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r docker/requirements_deploy.txt
-
+RUN pip install flask
 EXPOSE 8080
 
-CMD ["python", "src/stats.py"]
+ENV PORT=8080
+
+CMD ["sh", "-c", "python src/stats.py & python docker/service.py"]
