@@ -45,7 +45,7 @@ jobs:
         service: ${{ env.SERVICE_NAME }}
         region: ${{ env.REGION }}
         image: "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.GAR_NAME }}/${{ env.SERVICE_NAME }}:${{ github.sha }}"
-        flags: '--timeout=3600 --cpu=1 --memory=8048Mi'
+        flags: '--timeout=3600 --cpu=2 --memory=7048Mi'
         
     - name: Delete existing Cloud Run service
       run: |
