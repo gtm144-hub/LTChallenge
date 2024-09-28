@@ -12,4 +12,4 @@ EXPOSE 8080
 ENV PORT=8080
 RUN chmod +x src/stats.py docker/service.py
 
-CMD python src/stats.py & python docker/service.py
+CMD ["sh", "-c", "python src/stats.py & python docker/service.py"]
