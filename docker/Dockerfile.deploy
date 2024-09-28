@@ -9,8 +9,10 @@ RUN pip install --no-cache-dir -r docker/requirements_deploy.txt
 RUN pip install flask
 RUN pwd
 RUN ls
+RUN ls -ld .
+RUN ls -ld ..
 EXPOSE 8080
 
 ENV PORT=8080
 
-CMD cd .. & ls
+CMD python docker/service.py
