@@ -39,12 +39,9 @@ jobs:
         docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.GAR_NAME }}/${{ env.SERVICE_NAME }}:${{ github.sha }}"
 
     - name: Deploy to Cloud Run
-      run: |
-        gcloud run deploy ${{ env.SERVICE_NAME }} \
-          --image "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.GAR_NAME }}/${{ env.SERVICE_NAME }}:${{ github.sha }}"
-          --region ${{ env.REGION }} \
-          --platform managed \
-          --no-allow-unauthenticated \
-          --set-env-vars=PORT=8080 \
-          --command="/bin/sh" \
-          --args="-c,cd /app && ls -la && python src/stats.py & python docker/service.py"
+      id: deploy
+      uses: google-github-actions/deploy-cloudrun@v2
+      with:
+        service: ${{ env.SERVICE_NAME }}
+        region: ${{ env.REGION }}
+        image: "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.GAR_NAME }}/${{ env.SERVICE_NAME }}:${{ github.sha }}"
