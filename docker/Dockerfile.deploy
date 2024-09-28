@@ -14,5 +14,13 @@ RUN ls -ld ..
 EXPOSE 8080
 
 ENV PORT=8080
+RUN echo "Listing root directory:" && ls -la / && \
+    echo "Listing /app directory:" && ls -la /app && \
+    echo "Printing working directory:" && pwd && \
+    echo "Checking if /app is a directory:" && [ -d "/app" ] && echo "Yes" || echo "No"
 
-CMD python docker/service.py
+# Your original command (commented out for now)
+# CMD ["python", "src/stats.py", "&", "python", "docker/service.py"]
+
+# Use a shell form CMD for debugging
+CMD ls -la / && ls -la /app && pwd && echo "Starting scripts" && python src/stats.py & python docker/service.py
