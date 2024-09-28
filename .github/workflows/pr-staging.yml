@@ -1,4 +1,4 @@
-name: Run Tests on Main Branch Pull Request
+name: Run Unit Tests on Stage Branch Pull Request
 
 on:
   pull_request:
@@ -13,7 +13,7 @@ jobs:
 
     - name: Run pytest
       run: |
-        pip install -r requirements_staging.txt
+        pip install -r docker/requirements_stage.txt
         pytest test/q1_tests.py test/q2_tests.py test/q3_tests.py
 
       if: always() 
