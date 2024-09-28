@@ -18,8 +18,8 @@ RUN echo "Listing root directory:" && ls -la / && \
     echo "Listing /app directory:" && ls -la /app && \
     echo "Printing working directory:" && pwd && \
     echo "Checking if /app is a directory:" && [ -d "/app" ] && echo "Yes" || echo "No"
-
+RUN chmod +x src/stats.py docker/service.py
 # Your original command (commented out for now)
 # CMD ["python", "src/stats.py", "&", "python", "docker/service.py"]
 
-CMD cd app/ && python docker/service.py
+CMD python docker/service.py
