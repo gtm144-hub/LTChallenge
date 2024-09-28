@@ -22,5 +22,4 @@ RUN echo "Listing root directory:" && ls -la / && \
 # Your original command (commented out for now)
 # CMD ["python", "src/stats.py", "&", "python", "docker/service.py"]
 
-# Use a shell form CMD for debugging
-CMD ls -la / && ls -la /app && pwd && echo "Starting scripts" && python src/stats.py & python docker/service.py
+CMD cd app/ && python docker/service.py
