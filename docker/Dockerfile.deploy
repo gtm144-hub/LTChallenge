@@ -11,4 +11,4 @@ EXPOSE 8080
 
 ENV PORT=8080
 
-CMD ["python", "docker/service.py"]
+CMD ["ls"]
