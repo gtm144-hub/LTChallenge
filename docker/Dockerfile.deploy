@@ -11,4 +11,4 @@ EXPOSE 8080
 
 ENV PORT=8080
 
-CMD pwd & python docker/service.py
+CMD pwd & python app/docker/service.py
