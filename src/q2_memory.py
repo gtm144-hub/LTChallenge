@@ -1,4 +1,4 @@
-from typing import List, Tuple
+from typing import List, Tuple, Generator
 import pandas as pd
 import emoji
 
@@ -13,20 +13,20 @@ def q2_memory(file_path: str) -> List[Tuple[str, int]]:
     List[Tuple[str, int]]: Top 10 days with most emojis and their emoji counts
     """
     
-    chunks = pd.read_json(file_path, lines=True, chunksize=10000)
+    def process_chunk(chunk: pd.DataFrame) -> pd.DataFrame:
+        emojis_series = chunk['content'].apply(extract_emojis).explode() # Intente reducir memoria con sparse o category pero no baja 
+        return emojis_series.value_counts().reset_index(name='count')
+
+    def chunk_generator():
+        for chunk in pd.read_json(file_path, lines=True, chunksize=4000): # Miminimizamos el numero de lineas en cada batch da resultado
+            yield process_chunk(chunk)
+
+    emoji_counts = pd.concat(chunk_generator(), ignore_index=True)
     
-    dfs = []
-    
-    for chunk in chunks:
-        emojis_list = chunk['content'].apply(extract_emojis).explode()
-        emojis_count = emojis_list.to_frame(name='emoji').groupby('emoji').size().reset_index(name='count')
-        dfs.append(emojis_count)
-    
-    all_counts = pd.concat(dfs)
-    final_counts = all_counts.groupby('emoji')['count'].sum().reset_index()
-    top_10_days = final_counts.sort_values('count', ascending=False).head(10)    
-    
-    return [(row['emoji'], int(row['count'])) for _, row in top_10_days.iterrows()]
+    final_counts = emoji_counts.groupby('content')['count'].sum().reset_index()
+    top_10_days = final_counts.sort_values('count', ascending=False).head(10)
+
+    return list(zip(top_10_days['content'], top_10_days['count'].astype(int)))
 
 def extract_emojis(text: str) -> list:
     """Get emojis in a given text."""
