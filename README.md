@@ -88,6 +88,13 @@ Introducción de pruebas de aceptación: Una vez superadas las pruebas de códig
 
 **Diseño:** Escoger cloud run para acceptance tests permite un estandar para que todos los desarrolladores tengan un estandar donde no haya variaciones de hardware que puedan afectar tiempos de procesamiento y memoria. Asi mismo, permite escalar datos y al sistema si se requiere. 
 
+## Notas del Autor
+Integraciones para evaluar en el futuro:
+ - Evaluar la integracion de polars
+ - Revisar logica en el codigo de aprobacion en el PR de main.
+ - Integrar tags para realizar releases cada vez que cambie main branch
+ - Incorporar el nommbre del branch en memory_results y time_results en cloud storage
+
 ## Autor
 
 [Gabriel Preciado]
